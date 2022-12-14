@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import HomePage from "./pages/HomePage";
+import TimeSlots from "./pages/TimeSlotPage";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import TimeSlots from "./TimeSlots/TimeSlots";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
-function App() {
+const theme = createTheme();
+
+const  App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/timeslots" exact element={<TimeSlots />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
