@@ -55,11 +55,16 @@ const TimeslotComponent = () => {
   const updateTimeslots = (index) => {
     const spliceIndex = Math.ceil(location.state.duration / 15);
     if (spliceIndex > 0) {
-      
-      bookSlot({start: tiers[index].start, end: tiers[(spliceIndex - 1) + index].end });
-      setShowBookedSlots(true);
-      setShowButton(true);
-      tiers.splice(index, spliceIndex);
+      if((spliceIndex - 1) + index < tiers.length){
+        bookSlot({start: tiers[index].start, end: tiers[(spliceIndex - 1) + index].end });
+        setShowBookedSlots(true);
+        setShowButton(true);
+        tiers.splice(index, spliceIndex);
+      }
+      else
+      {
+        setShowFailedButton(true);
+      }
     } else {
       setShowFailedButton(true);
     }
@@ -194,7 +199,7 @@ const TimeslotComponent = () => {
                   severity="error"
                   sx={{ width: "100%" }}
                 >
-                  Duration Not Provided.
+                  Invalid Timestamp/Duration.
                 </MuiAlert>
               </Snackbar>
             )}
